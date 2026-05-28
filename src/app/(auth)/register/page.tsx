@@ -3,16 +3,6 @@
 import { useActionState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { register } from '@/server/actions/auth'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
 import Link from 'next/link'
 
 export default function RegisterPage() {
@@ -26,62 +16,116 @@ export default function RegisterPage() {
   }, [state, router])
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-2xl">회원가입</CardTitle>
-          <CardDescription>새 계정을 만드세요</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <form action={action} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="name">이름</Label>
-              <Input
+    <div className="flex min-h-screen flex-col bg-black">
+      {/* M Stripe */}
+      <div className="m-stripe w-full" />
+
+      <div className="flex flex-1 items-center justify-center px-4 py-24">
+        <div className="w-full max-w-sm">
+          <h1
+            style={{
+              fontSize: 32,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: 0,
+              color: '#ffffff',
+              marginBottom: 8,
+            }}
+          >
+            Register
+          </h1>
+          <p
+            style={{
+              fontSize: 14,
+              fontWeight: 300,
+              color: '#7e7e7e',
+              marginBottom: 40,
+            }}
+          >
+            새 계정을 만드세요
+          </p>
+
+          <form action={action}>
+            <div style={{ marginBottom: 20 }}>
+              <label className="label-bmw" htmlFor="name">이름</label>
+              <input
                 id="name"
                 name="name"
                 type="text"
                 placeholder="홍길동"
                 required
                 autoComplete="name"
+                className="input-bmw"
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="email">이메일</Label>
-              <Input
+
+            <div style={{ marginBottom: 20 }}>
+              <label className="label-bmw" htmlFor="email">이메일</label>
+              <input
                 id="email"
                 name="email"
                 type="email"
                 placeholder="you@example.com"
                 required
                 autoComplete="email"
+                className="input-bmw"
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">비밀번호</Label>
-              <Input
+
+            <div style={{ marginBottom: 24 }}>
+              <label className="label-bmw" htmlFor="password">비밀번호</label>
+              <input
                 id="password"
                 name="password"
                 type="password"
                 placeholder="8자 이상"
                 required
                 autoComplete="new-password"
+                className="input-bmw"
               />
             </div>
+
             {state?.success === false && (
-              <p className="text-sm text-red-500">{state.error}</p>
+              <p
+                style={{
+                  fontSize: 13,
+                  color: '#e22718',
+                  marginBottom: 16,
+                  letterSpacing: 0.3,
+                }}
+              >
+                {state.error}
+              </p>
             )}
-            <Button type="submit" className="w-full" disabled={pending}>
-              {pending ? '가입 중...' : '회원가입'}
-            </Button>
+
+            <button type="submit" className="btn-bmw" disabled={pending}>
+              {pending ? 'CREATING ACCOUNT...' : 'CREATE ACCOUNT'}
+            </button>
           </form>
-          <p className="text-center text-sm text-gray-500">
+
+          <p
+            style={{
+              textAlign: 'center',
+              fontSize: 13,
+              fontWeight: 300,
+              color: '#7e7e7e',
+              marginTop: 32,
+            }}
+          >
             이미 계정이 있으신가요?{' '}
-            <Link href="/login" className="underline hover:text-gray-900">
+            <Link
+              href="/login"
+              style={{
+                color: '#ffffff',
+                textDecoration: 'underline',
+                letterSpacing: 0.5,
+              }}
+            >
               로그인
             </Link>
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }

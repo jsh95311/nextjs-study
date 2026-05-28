@@ -3,16 +3,6 @@
 import { useActionState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { login } from '@/server/actions/auth'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
 import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 
@@ -27,70 +17,140 @@ export default function LoginPage() {
   }, [state, router])
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-2xl">로그인</CardTitle>
-          <CardDescription>계정에 로그인하세요</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <form action={action} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">이메일</Label>
-              <Input
+    <div className="flex min-h-screen flex-col bg-black">
+      {/* M Stripe */}
+      <div className="m-stripe w-full" />
+
+      <div className="flex flex-1 items-center justify-center px-4 py-24">
+        <div className="w-full max-w-sm">
+          {/* Headline */}
+          <h1
+            style={{
+              fontSize: 32,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: 0,
+              color: '#ffffff',
+              marginBottom: 8,
+            }}
+          >
+            Log In
+          </h1>
+          <p
+            style={{
+              fontSize: 14,
+              fontWeight: 300,
+              color: '#7e7e7e',
+              marginBottom: 40,
+            }}
+          >
+            계정에 로그인하세요
+          </p>
+
+          {/* Form */}
+          <form action={action}>
+            <div style={{ marginBottom: 20 }}>
+              <label className="label-bmw" htmlFor="email">이메일</label>
+              <input
                 id="email"
                 name="email"
                 type="email"
                 placeholder="you@example.com"
                 required
                 autoComplete="email"
+                className="input-bmw"
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">비밀번호</Label>
-              <Input
+
+            <div style={{ marginBottom: 24 }}>
+              <label className="label-bmw" htmlFor="password">비밀번호</label>
+              <input
                 id="password"
                 name="password"
                 type="password"
                 placeholder="••••••••"
                 required
                 autoComplete="current-password"
+                className="input-bmw"
               />
             </div>
+
             {state?.success === false && (
-              <p className="text-sm text-red-500">{state.error}</p>
+              <p
+                style={{
+                  fontSize: 13,
+                  color: '#e22718',
+                  marginBottom: 16,
+                  letterSpacing: 0.3,
+                }}
+              >
+                {state.error}
+              </p>
             )}
-            <Button type="submit" className="w-full" disabled={pending}>
-              {pending ? '로그인 중...' : '로그인'}
-            </Button>
+
+            <button type="submit" className="btn-bmw" disabled={pending}>
+              {pending ? 'LOGGING IN...' : 'LOG IN'}
+            </button>
           </form>
 
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-white px-2 text-gray-500">또는</span>
-            </div>
+          {/* OR divider */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 16,
+              margin: '24px 0',
+            }}
+          >
+            <div style={{ flex: 1, height: 1, background: '#3c3c3c' }} />
+            <span
+              style={{
+                fontSize: 11,
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                letterSpacing: 1.5,
+                color: '#7e7e7e',
+              }}
+            >
+              OR
+            </span>
+            <div style={{ flex: 1, height: 1, background: '#3c3c3c' }} />
           </div>
 
-          <Button
-            variant="outline"
-            className="w-full"
+          {/* Google button */}
+          <button
             type="button"
+            className="btn-bmw"
+            style={{ borderColor: '#3c3c3c', color: '#bbbbbb' }}
             onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
           >
-            Google로 로그인
-          </Button>
+            GOOGLE로 로그인
+          </button>
 
-          <p className="text-center text-sm text-gray-500">
+          {/* Register link */}
+          <p
+            style={{
+              textAlign: 'center',
+              fontSize: 13,
+              fontWeight: 300,
+              color: '#7e7e7e',
+              marginTop: 32,
+            }}
+          >
             계정이 없으신가요?{' '}
-            <Link href="/register" className="underline hover:text-gray-900">
+            <Link
+              href="/register"
+              style={{
+                color: '#ffffff',
+                textDecoration: 'underline',
+                letterSpacing: 0.5,
+              }}
+            >
               회원가입
             </Link>
           </p>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }
