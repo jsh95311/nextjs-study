@@ -35,7 +35,7 @@ cp .env.example .env
 | 변수 | 방법 |
 |------|------|
 | `DATABASE_URL` | [Neon](https://neon.tech) → 새 프로젝트 → Connection string 복사 |
-| `NEXTAUTH_SECRET` | 터미널에서 `openssl rand -base64 32` 실행 |
+| `AUTH_SECRET` | 터미널에서 `openssl rand -base64 32` 실행 |
 | `GOOGLE_CLIENT_ID` | [Google Cloud Console](https://console.cloud.google.com) → OAuth 2.0 Client IDs |
 | `GOOGLE_CLIENT_SECRET` | 위와 동일 |
 
