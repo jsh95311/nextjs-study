@@ -49,3 +49,6 @@ docs/superpowers/
 
 # Prisma generated client
 src/generated/
+
+# Playwright MCP artifacts
+.playwright-mcp/
