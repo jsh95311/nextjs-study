@@ -44,3 +44,8 @@ next-env.d.ts
 .omc/
 .claude/
 docs/superpowers/
+
+/src/generated/prisma
+
+# Prisma generated client
+src/generated/
