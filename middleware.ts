@@ -8,7 +8,8 @@ export function middleware(request: NextRequest) {
 
   const isProtected =
     request.nextUrl.pathname.startsWith('/dashboard') ||
-    request.nextUrl.pathname.startsWith('/settings')
+    request.nextUrl.pathname.startsWith('/settings') ||
+    request.nextUrl.pathname.startsWith('/posts')
 
   if (isProtected && !sessionToken) {
     return NextResponse.redirect(new URL('/login', request.url))
@@ -18,5 +19,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/settings/:path*', '/settings'],
+  matcher: ['/dashboard/:path*', '/settings/:path*', '/settings', '/posts/:path*', '/posts'],
 }

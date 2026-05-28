@@ -59,6 +59,19 @@ export default async function DashboardPage() {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <Link
+            href="/posts"
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: 1.5,
+              color: '#7e7e7e',
+              textDecoration: 'none',
+            }}
+          >
+            Posts
+          </Link>
+          <Link
             href="/settings"
             style={{
               fontSize: 11,

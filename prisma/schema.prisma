@@ -15,6 +15,7 @@ model User {
   image         String?
   password      String?
   accounts      Account[]
+  posts         Post[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }
@@ -44,4 +45,14 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   String   @db.Text
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
