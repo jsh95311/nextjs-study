@@ -1,10 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 
-vi.mock('@prisma/adapter-pg', () => ({
-  PrismaPg: vi.fn(),
-}))
-
-vi.mock('@/generated/prisma/client', () => ({
+vi.mock('@prisma/client', () => ({
   PrismaClient: vi.fn(function () { return {} }),
 }))
 
