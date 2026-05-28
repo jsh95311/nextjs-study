@@ -1,7 +1,11 @@
 import { describe, it, expect, vi } from 'vitest'
 
-vi.mock('@/lib/auth', () => ({
-  auth: vi.fn((handler: unknown) => handler),
+vi.mock('next-auth', () => ({
+  default: vi.fn(() => ({ auth: vi.fn() })),
+}))
+
+vi.mock('@/lib/auth.config', () => ({
+  authConfig: { session: { strategy: 'jwt' }, providers: [], pages: { signIn: '/login' } },
 }))
 
 describe('middleware config', () => {
