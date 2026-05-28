@@ -1,6 +1,7 @@
 import { auth } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { SignOutButton } from '@/components/sign-out-button'
+import Link from 'next/link'
 
 export default async function DashboardPage() {
   const session = await auth()
@@ -56,7 +57,22 @@ export default async function DashboardPage() {
             Dashboard
           </span>
         </div>
-        <SignOutButton />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <Link
+            href="/settings"
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              letterSpacing: 1.5,
+              color: '#7e7e7e',
+              textDecoration: 'none',
+            }}
+          >
+            Settings
+          </Link>
+          <SignOutButton />
+        </div>
       </header>
 
       {/* Content */}

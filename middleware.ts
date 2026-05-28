@@ -6,7 +6,11 @@ export function middleware(request: NextRequest) {
     request.cookies.get('__Secure-authjs.session-token') ??
     request.cookies.get('authjs.session-token')
 
-  if (request.nextUrl.pathname.startsWith('/dashboard') && !sessionToken) {
+  const isProtected =
+    request.nextUrl.pathname.startsWith('/dashboard') ||
+    request.nextUrl.pathname.startsWith('/settings')
+
+  if (isProtected && !sessionToken) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
 
@@ -14,5 +18,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*'],
+  matcher: ['/dashboard/:path*', '/settings/:path*', '/settings'],
 }
